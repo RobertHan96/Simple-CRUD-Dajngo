@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>학생 등록창</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script>
+      src="https://code.jquery.com/jquery-3.4.1.min.js"
+      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+      crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        .navbar-default {
+            margin-top: 40px;
+        }
+
+        .label {
+            margin-left: 135px;
+        }
+        .container{
+            margin-top: 20px;
+            border: 1px solid darkgoldenrod;
+            height: auto;
+            padding-top: 20px;
+            padding-left: 20px;
+
+        }
+        .regMenu span {
+            display: block;
+            border: 1px solid black;
+            width: 50px;
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .form-item {
+            margin-top: 10px;
+            width: 200px;
+            border: 1px solid black;
+            display: block;
+            padding-left: 5px;
+
+        }
+        .content-label {
+            margin-bottom: 10px;
+        }
+        .title {
+            width: 93%;
+        }
+
+        .content {
+            clear: both;
+            height: 500px;
+            width : 98% ;
+            text-align: left;
+
+        }
+
+        .regMenu{
+            float: left;
+            margin-right: 10px;
+        }
+
+        .btn-primary {
+            margin-top: 15px;
+            border-radius: 3px;
+            padding: 5px;
+          }
+
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="{% url 'students:stuAll' %}">
+        익명 자유게시판
+      </a>
+    </div>
+  </div>
+</nav>
+<h3> <span class="label label-default">
+        글 작성하기 </span></h3>
+<div class="container">
+
+    <div class="regMenu">
+        <span> 제목 </span>
+        <span class="content-label"> 내용 </span>
+{#        <span> 나이 </span>#}
+{#        <span> 학년 </span>#}
+{#        <span> 성별 </span>#}
+    </div>
+    <form  class="form-group" action="{% url 'students:regCon' %}" method="post">
+        {% csrf_token %}
+        <input placeholder="100글자까지만 입력 가능"class="form-item title" type="text" name="name">
+        <input  class="form-item content" type="text" name="major">
+{#        <input class="form-item" type="text" name="age">#}
+{#        <input class="form-item" type="text" name="grade">#}
+{#        <input class="form-item" type="text" name="gender">#}
+        <input class="btn-primary" type="submit" name="Register">
+    </form>
+
+</div>
+
+
+</body>
+</html>

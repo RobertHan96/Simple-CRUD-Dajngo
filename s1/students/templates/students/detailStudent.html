@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>학생 상세 정보</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script>
+      src="https://code.jquery.com/jquery-3.4.1.min.js"
+      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+      crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        .navbar-header {
+            text-align: center;
+        }
+
+        .navbar-default {
+            margin-top: 40px;
+        }
+
+        .regMenu span {
+            display: block;
+            border: 1px solid black;
+            width: 50px;
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .form-group span {
+            display: block;
+            margin-top: 10px;
+            width: 500px;
+            border: 1px solid black;
+        }
+
+        .btn-group
+        {
+            margin-left: 135px;
+          }
+
+
+        .btn-group >  a {
+            display: block;
+            width: auto;
+            float: left;
+            padding: 5px;
+            border-radius: 3px;
+            margin-right: 10px;
+
+        }
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="{% url 'students:stuAll' %}">
+        익명 자유게시판
+      </a>
+    </div>
+  </div>
+</nav>
+
+<div class="container list-group">
+    <div class="list-group-item disabled">
+    {#    게시글 제목을 상단에 표시하는 구문 #}
+        {% csrf_token %}
+
+        {%  if student_info %}
+            {{ student_info.s_name }}
+        {% else %}
+            <p> 등록된 학생 정보가 없습니다.</p>
+
+        {% endif %}
+    </div>
+    <form   action="{% url 'students:regCon' %}" method="post">
+        {% csrf_token %}
+
+        {%  if student_info %}
+{#            <span class="list-group-item">{{ student_info.s_name }} </span>#}
+            <span class="list-group-item"> {{ student_info.s_major }} </span>
+{#            <span class="list-group-item"> {{ student_info.s_age }}</span>#}
+{#            <span class="list-group-item"> {{ student_info.s_grade }} </span>#}
+{#            <span class="list-group-item"> {{ student_info.s_gender }} </span>#}
+        {% else %}
+            <p> 등록된 학생 정보가 없습니다.</p>
+
+        {% endif %}
+    </form>
+
+</div>
+
+{#<div class="list-group col-xs-2">#}
+{##}
+{#        <span class="list-group-item"> 이름 </span>#}
+{#        <span class="list-group-item"> 전공 </span>#}
+{#        <span class="list-group-item"> 나이 </span>#}
+{#        <span class="list-group-item"> 학년 </span>#}
+{#        <span class="list-group-item"> 성별 </span>#}
+{#    </div>#}
+{#</div>#}
+
+<div class="btn-group" >
+    <a class="btn-primary" href="{% url 'students:stuMod' student_info.s_name %}"> 수정 </a>
+    <a class="btn-primary" href="{% url 'students:stuDel' student_info.s_name %}"> 삭제 </a>
+    <a class="btn-primary" href="{% url 'students:stuAll' %}"> 목록 </a>
+    <a class="btn-primary" href="{% url 'students:reg' %}"> 작성 </a>
+</div>
+
+</body>
+</html>
